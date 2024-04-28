@@ -86,8 +86,10 @@ uint64_t random::UUID()
 __uint128_t random::UUID128()
 {
     static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
-    std::uniform_int_distribution<__uint128_t> dist(std::numeric_limits<__uint128_t>::min(), std::numeric_limits<__uint128_t>::max());
-    return dist(gen);
+    std::uniform_int_distribution<uint64_t> dist(std::numeric_limits<uint64_t>::min(), std::numeric_limits<uint64_t>::max());
+    uint64_t a = dist(gen);
+    uint64_t b = dist(gen);
+    return ((__uint128_t)a << 64) | b;
 }
 /**
  * 
