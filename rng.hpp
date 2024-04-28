@@ -11,13 +11,6 @@
  *        Therefore only equality comparison operators are implemented.
  * 
  */
-struct uint128_t
-{
-    uint64_t first;
-    uint64_t second;
-    bool operator==(const uint128_t& cmp);
-    bool operator!=(const uint128_t& cmp);
-};
 
 namespace random
 {
@@ -69,7 +62,7 @@ namespace random
      *          Intended only for ID comparisons.
      * 
      */
-    uint128_t UUID128();
+    __uint128_t UUID128();
     /**
      * 
      * @brief   Get a random index from a vector.
