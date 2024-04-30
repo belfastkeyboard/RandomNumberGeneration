@@ -1,5 +1,4 @@
-#ifndef     RANDOM_NUMBER_GENERATION
-#define     RANDOM_NUMBER_GENERATION 1
+#pragma once
 
 #include    <random>
 #include    <chrono>
@@ -20,7 +19,7 @@ namespace random
      * 
      */
     template <typename T>
-    T number(T __min, T __max)
+    inline T number(T __min, T __max)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         static_assert(std::is_arithmetic<T>::value, "must be an arithmetic type");
@@ -36,7 +35,7 @@ namespace random
      * 
      */
     template <typename T>
-    T weighted_number(T __mean, double __std_dev)
+    inline T weighted_number(T __mean, double __std_dev)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         static_assert(std::is_arithmetic<T>::value, "must be an arithmetic type");
@@ -53,7 +52,7 @@ namespace random
      * 
      */
     template <typename T>
-    T weighted_number(T __min, T __max, double __mean, double __std_dev)
+    inline T weighted_number(T __min, T __max, double __mean, double __std_dev)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         static_assert(std::is_arithmetic<T>::value, "must be an arithmetic type");
@@ -71,7 +70,7 @@ namespace random
      * 
      */
     template <typename T>
-    bool percentage(T __x)
+    inline bool percentage(T __x)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         static_assert(std::is_arithmetic<T>::value, "percentage must be an arithmetic type");
@@ -83,7 +82,7 @@ namespace random
      * @brief   Generates a random 64-bit UUID.
      * 
      */
-    uint64_t UUID()
+    inline uint64_t UUID()
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         std::uniform_int_distribution<uint64_t> dist(std::numeric_limits<uint64_t>::min(), std::numeric_limits<uint64_t>::max());
@@ -94,7 +93,7 @@ namespace random
      * @brief   Generates a random 128-bit UUID.
      * 
      */
-    __uint128_t UUID128()
+    inline __uint128_t UUID128()
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         std::uniform_int_distribution<uint64_t> dist(std::numeric_limits<uint64_t>::min(), std::numeric_limits<uint64_t>::max());
@@ -108,7 +107,7 @@ namespace random
      * 
      */
     template <typename T>
-    size_t index(std::vector<T> __vec)
+    inline size_t index(std::vector<T> __vec)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         std::uniform_int_distribution<int> dist(0, __vec.size() - 1);
@@ -123,7 +122,7 @@ namespace random
      * 
      */
     template <typename T>
-    size_t weighted_index(std::vector<T> __v, size_t __mean, size_t __std_dev)
+    inline size_t weighted_index(std::vector<T> __v, size_t __mean, size_t __std_dev)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         std::normal_distribution<double> dist(__mean, __std_dev);
@@ -139,7 +138,7 @@ namespace random
      * 
      */
     template <typename T>
-    size_t weighted_index(std::vector<T> __vec)
+    inline size_t weighted_index(std::vector<T> __vec)
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         static_assert(std::is_integral<T>::value, "weights vector must be an integral type");
@@ -151,12 +150,9 @@ namespace random
      * @brief Get a Mersenne twister generator object. Used in algorithms like std::shuffle.
      * 
      */
-    std::mt19937 gen()
+    inline std::mt19937 gen()
     {
         static std::mt19937 gen(std::chrono::high_resolution_clock::now().time_since_epoch().count());
         return gen;
     }
 }
-
-
-#endif
